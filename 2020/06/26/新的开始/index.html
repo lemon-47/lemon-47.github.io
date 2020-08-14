@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>文章标题 | Hexo</title>
+  <title>最近学习python的openpyxl的收获 | Hexo</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <link rel="manifest" href="/manifest.json">
@@ -114,9 +114,9 @@
   	
   	
     
+          
       
       
-         
         
     
     
@@ -141,12 +141,12 @@
   		
   	
   	
-  	1monthago
+  	2monthsago
 
 
   
 <div>
-read time: 1分钟
+read time: 3分钟
 </div>
 </div>
 
@@ -161,7 +161,7 @@ read time: 1分钟
         
   
     <h1 class="article-title" itemprop="name">
-      文章标题
+      最近学习python的openpyxl的收获
     </h1>
   
 
@@ -169,7 +169,39 @@ read time: 1分钟
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Taco Tuesday<br>gigigigigigigi！</p>
+        <p>因为要利用python来读写excel，于是学习了openpyxl模块的一些知识，但是还没有去实践运用，后面会挤出时间去认真钻研！<br>一.创建读取和保存excel文件</p>
+<p>1.创建excel</p>
+<p>from openpyxl import Workbook<br>wb = Workbook()</p>
+<p>2.读取excel</p>
+<p>from openpyxl import load_workbook<br>wb = load_workbook(‘1.xlsx’)</p>
+<p>3.保存excel</p>
+<p>wb.save(‘filename.xlsx’)</p>
+<p>二.sheet表单操作</p>
+<p>1.获取sheet</p>
+<p>#以list方式返回excel文件所有sheet名称（-&gt;list[str,str..]）<br>wb.sheetnames<br>wb.get_sheet_names()   </p>
+<p>2.选择sheet对象</p>
+<p>#根据sheet名称选取<br>ws = wb[‘sheet1’]<br>ws = wb.get_sheet_by_name(‘sheet1’)<br>#选择当前显示，活动的sheet<br>ws = wb.active<br>ws = wb.get_active_sheet()</p>
+<p>3.创建新的sheet</p>
+<p>#默认插入到最后<br>ws = wb.create_sheet(“newsheet”)<br>#插入到最开始的位置(从0开始计算)<br>ws = wb.create_sheet(“newsheet”, 0)</p>
+<p>4.复制一个sheet对象</p>
+<p>source = wb.active<br>target = wb.copy_worksheet(source)</p>
+<p>5.删除sheet</p>
+<p>wb.remove(sheetobject)<br>del wb[‘sheet’] #sheetname</p>
+<p>6.sheet常见属性</p>
+<p>#sheet名称<br>sheet.title<br>#最大行和最大列<br>sheet.max_row<br>sheet.max_column<br>#行列生成器<br>sheet.rows #为行生成器, 里面是每一行的cell对象，由一个tuple包裹。<br>sheet.columns #为列生成器, 里面是每一列的cell对象，由一个tuple包裹。</p>
+<p>可以使用list(sheet.rows)[0].value 类似方法来获取数据，或<br>for row in sheet.rows:<br>    for cell in row:<br>        print(cell.value)<br>来遍历值,或值生成器 sheet.values 仅遍历值</p>
+<p>7.sheet的其它操作<br>#插入行，在第7行之前插入<br>ws.insert_rows(7)<br>#插入列，在第7列之前插入<br>ws.insert_cols(7)<br>#删除行列<br>ws.delete_rows(7)<br>ws.delete_cols(7)<br>#可以删除多个<br>ws.delete_cols(6, 3)</p>
+<p>三.单元格对象</p>
+<p>1.选择cell单元格对象</p>
+<p>#根据名称访问<br>a1 = ws[‘A1’] #A列1行的单元对象<br>a2 = ws[‘a2’] #也可以小写<br>#cell方法访问<br>b2 = ws.cell(row=2, column=2)<br>b3 = ws.cell(3,2)<br>#从cell列表中返回<br>b3 = list(ws.rows)[2][1]<br>b3 = list(ws.columns)[1][2]</p>
+<p>2.单元格属性<br>#返回列<br>cell.column<br>#返回行<br>cell.row<br>#返回值<br>cell.value<br>注意:如果单元格是使用的公式，则值是公式而不是计算后的值<br>#返回单元格格式属性<br>cell.number_format<br>默认为General格式<br>#单元格样式<br>cell.font</p>
+<p>3.更改单元格值</p>
+<p>#直接赋值<br>ws[‘a2’] = 222<br>ws[‘a2’] = ‘aaa’<br>ws[‘b2’] = ‘=SUM(A1:A17)’ #使用公式</p>
+<p>#value属性赋值<br>cell.value = 222<br>或<br>ws.cell(1,2,value = 222)</p>
+<p>4.移动单元格</p>
+<p>ws.move_range(“D4:F10”, rows=-1, cols=2)<br>表示单元格D4:F10向上移动一行，右移两列。单元格将覆盖任何现有单元格。(最新版本的才会这个方法，使用pip list查看版本是否为最新)<br>ws.move_range(“G4:H10”, rows=1, cols=1, translate=True)<br>移动中包含公式的自动转换</p>
+<p>5.合并与拆分单元格</p>
+<p>#合并单元格,以最左上角写入数据或读取数据<br>ws.merge_cells(‘A2:D2’)<br>#拆分单元格<br>ws.unmerge_cells(‘A2:D2’)</p>
 
       
     </div>
