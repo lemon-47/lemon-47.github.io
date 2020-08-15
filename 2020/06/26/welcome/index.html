@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Hexo</title>
+  <title>python使用openpyxl对excel进行最简单的操作 | Hexo</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <link rel="manifest" href="/manifest.json">
@@ -146,7 +146,7 @@
 
   
 <div>
-read time: 3分钟
+read time: 4分钟
 </div>
 </div>
 
@@ -161,7 +161,7 @@ read time: 3分钟
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      python使用openpyxl对excel进行最简单的操作
     </h1>
   
 
@@ -169,19 +169,40 @@ read time: 3分钟
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>因为要用python读取excel，所以最近简单学习了openpyxl模块，先使用openpyxl对excel进行简单操作试试吧！</p>
+<h2 id="openpyxl"><a href="#openpyxl" class="headerlink" title="openpyxl"></a>openpyxl</h2><h3 id="安装openpyxl"><a href="#安装openpyxl" class="headerlink" title="安装openpyxl"></a>安装openpyxl</h3><p>首先打开命令提示符，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install openpyxl</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="然后我们检验下是否安装成功"><a href="#然后我们检验下是否安装成功" class="headerlink" title="然后我们检验下是否安装成功"></a>然后我们检验下是否安装成功</h3><p>打开python IDLE输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import openpyxl</span><br></pre></td></tr></table></figure>
+<p>若可以成功导入<br><img src="https://i.loli.net/2020/08/15/sBQSNukJVwZgHAe.png" alt="成功导入.png"></p>
+<p>则安装成功</p>
+<p>###创建一个叫wb的工作簿<br>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wb &#x3D; openpyxl.Workbook（）</span><br></pre></td></tr></table></figure>
+<p>###获取工作表<br>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ws &#x3D; wb.active</span><br></pre></td></tr></table></figure>
+<p>然后工作表的名称就是‘Sheet’</p>
+<p>如图</p>
+<p><img src="https://i.loli.net/2020/08/15/okLrExdFTnCpOGf.png" alt="shie.png"></p>
+<p>这样的话表就做好了，数据直接赋值，比如我往B2单元格就直接输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ws[&#39;B2&#39;] &#x3D; 123</span><br></pre></td></tr></table></figure>
+<p>也可以使用append（）方法进行添加数值</p>
+<p>例如直接输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ws.append([4,5,6])</span><br></pre></td></tr></table></figure>
+<p>然后还可以把当前的时间保存到表中</p>
+<p>首先要输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import datetime</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>然后调用now函数输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ws[&#39;C1&#39;]&#x3D;datetime.datetime.now()</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>最后保存工作表<br>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wb.save(&#39;first.xlsx&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>即可保存成功</p>
+<p>然后我们看看操作结果吧</p>
+<p><img src="https://i.loli.net/2020/08/15/zN9YHe81TcmDIJR.png" alt="结果.png"></p>
 
       
     </div>
